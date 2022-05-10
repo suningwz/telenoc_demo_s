@@ -6,6 +6,7 @@
             <script type="text/javascript" src="/telenoc_pos_ext/static/src/js/models.js"/>
             <script type="text/javascript" src="/telenoc_pos_ext/static/src/js/Screens/ProductScreen/OrderCartWidget.js"/>
             <script type="text/javascript" src="/telenoc_pos_ext/static/src/js/Screens/ProductScreen/pos_discount_button.js"/>
+
         </xpath>
     </template>
 

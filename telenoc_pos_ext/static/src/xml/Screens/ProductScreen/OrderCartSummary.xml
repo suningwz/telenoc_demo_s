@@ -31,9 +31,11 @@
                     </span>
                 </div>
 <!--                <div>-->
-<!--                    <span class="badge">Discount Amount: </span>-->
+<!--                    <span class="badge">Branch ID: </span>-->
 <!--                    <span class="value">-->
-<!--                        <t t-esc="props.uni_discount_am"/>-->
+<!--                        <t t-esc="props.email_part"/>-->
+<!--                        <t t-esc="props.phone_part"/>-->
+<!--&lt;!&ndash;                        <t t-esc="props.email_part"/>&ndash;&gt;-->
 <!--                    </span>-->
 <!--                </div>-->
                 <div>

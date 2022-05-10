@@ -10,12 +10,28 @@
                 <div>Subtotal<span t-esc="env.pos.format_currency(receipt.subtotal)" class="pos-receipt-right-align"/></div>
                 <t t-foreach="receipt.tax_details" t-as="tax" t-key="tax.name">
                     <div class="responsive-price">
-                        <t t-esc="tax.name" />
+                        <t t-esc="tax.name"/>
                         <span t-esc='env.pos.format_currency_no_symbol(tax.amount)' class="pos-receipt-right-align"/>
                     </div>
                 </t>
-                <div>Universal Discount<span t-esc="env.pos.format_currency(receipt.uni_discount)" class="pos-receipt-right-align"/></div>
+                <div>Universal Discount<span t-esc="env.pos.format_currency(receipt.uni_discount)"
+                                             class="pos-receipt-right-align"/></div>
+                <!--                <div><span t-esc="receipt.branch_id"/></div>-->
             </t>
         </xpath>
+        <xpath expr="//img[@class='pos-receipt-logo']" position="replace">
+            <img class="pos-receipt-logo" t-att-src="receipt.image_part" alt="Logo"/>
+        </xpath>
+        <xpath expr="//t[@t-if='receipt.company.phone']" position="replace">
+            <t t-if="receipt.company.phone">
+                    <div>Tel:<t t-esc="receipt.phone_part"/></div>
+                </t>
+        </xpath>
+        <xpath expr="//t[@t-if='receipt.company.email']" position="replace">
+            <t t-if="receipt.company.email">
+                    <div><t t-esc="receipt.email_part" /></div>
+                </t>
+        </xpath>
+
     </t>
 </templates>

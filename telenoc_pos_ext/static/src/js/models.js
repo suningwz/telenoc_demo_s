@@ -5,6 +5,10 @@ odoo.define("telenoc_pos_ext.models", function (require){
 
     var round_di = utils.round_decimals;
     var round_pr = utils.round_precision;
+    const PosComponent = require('point_of_sale.PosComponent');
+    const ProductScreen = require('point_of_sale.ProductScreen');
+    const { useListener } = require('web.custom_hooks');
+    const Registries = require('point_of_sale.Registries');
 
     var posmodel_super = models.PosModel.prototype;
     models.PosModel = models.PosModel.extend({
@@ -31,6 +35,10 @@ odoo.define("telenoc_pos_ext.models", function (require){
                 this.uni_discount = 0;
                 this.uni_discount_type = '';
                 this.uni_discount_am = 0;
+                this.branch_id = 0;
+                this.phone_part = 0;
+                this.email_part = 0;
+                this.image_part = 0;
             }
             return res;
         },
@@ -44,11 +52,15 @@ odoo.define("telenoc_pos_ext.models", function (require){
             json.uni_discount = this.get_uni_discount();
             json.uni_discount_type = this.get_uni_discount_type();
             json.uni_discount_am = this.get_uni_discount_am();
+            json.phone_part = this.get_phone_part();
+            json.email_part = this.get_email_part();
+            json.image_part = this.get_image_part();
 
             return json;
         },
         export_for_printing: function(){
             let json = super_order.export_for_printing.apply(this, arguments);
+            let order = this.pos.get_order();
             json.c_untaxed_amount = this.get_c_untaxed_amount();
             json.c_amount = this.get_c_amount();
             json.c_discount_amount = this.get_c_discount_amount();
@@ -57,6 +69,12 @@ odoo.define("telenoc_pos_ext.models", function (require){
             json.uni_discount = this.get_uni_discount();
             json.uni_discount_type = this.get_uni_discount_type();
             json.uni_discount_am = this.get_uni_discount_am();
+            json.phone_part = this.get_phone_part();
+            json.email_part = this.get_email_part();
+            json.image_part = this.get_image_part();
+//            alert(this.env.pos.config.discount_product_id[0]);
+
+
 
             return json;
         },
@@ -89,6 +107,30 @@ odoo.define("telenoc_pos_ext.models", function (require){
             this.uni_discount_type=uni_discount_type;
 
         },
+
+        get_image_part: function() {
+        return this.image_part;
+        },
+
+        set_image_part: function(image_part) {
+            this.image_part=image_part;
+        },
+
+        get_phone_part: function() {
+        return this.phone_part;
+        },
+
+        set_phone_part: function(phone_part) {
+            this.phone_part=phone_part;
+        },
+        get_email_part: function() {
+        return this.email_part;
+        },
+
+        set_email_part: function(email_part) {
+            this.email_part=email_part;
+        },
+
 
         get_uni_discount_am: function() {
         if (this.uni_discount_am === undefined){

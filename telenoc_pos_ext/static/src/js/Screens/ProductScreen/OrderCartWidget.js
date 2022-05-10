@@ -25,10 +25,14 @@ odoo.define('telenoc_pos_ext.OrderCartWidget', function(require) {
 //                        this.scrollToBottom = false;
 //                    }
 //                });
-                this.state = useState({ c_untaxed_amount: 0, c_amount: 0, c_discount_amount: 0, c_total_amount: 0, c_tax_amount: 0, uni_discount: 0, uni_discount_am: 0});
+                this.state = useState({ c_untaxed_amount: 0, c_amount: 0, c_discount_amount: 0, c_total_amount: 0, c_tax_amount: 0, uni_discount: 0, uni_discount_am: 0, email_part: 0, image_part: 0, phone_part:0});
                 this._updateSummary();
             }
             _updateSummary() {
+//                alert(this.env.pos.config.phone_part);
+                this.order.set_email_part(this.env.pos.config.email_part);
+                this.order.set_phone_part(this.env.pos.config.phone_part);
+                this.order.set_image_part(this.env.pos.config.img_part);
                 const c_untaxed_amount = this.order ? this.order.get_c_untaxed_amount() : 0;
                 const c_amount = this.order ? this.order.get_c_amount() : 0;
                 const c_discount_amount = this.order ? this.order.get_c_discount_amount() : 0;
@@ -36,6 +40,9 @@ odoo.define('telenoc_pos_ext.OrderCartWidget', function(require) {
                 const c_tax_amount = this.order ? this.order.get_c_tax_amount() : 0;
                 const uni_discount = this.order ? this.order.get_uni_discount() : 0;
                 const uni_discount_am = this.order ? this.order.get_uni_discount_am() : 0;
+                const email_part = this.order ? this.order.get_email_part() : 0;
+                const phone_part = this.order ? this.order.get_phone_part() : 0;;
+                const image_part = this.order ? this.order.get_image_part() : 0;;
 
 
                 this.state.c_untaxed_amount = this.env.pos.format_currency(c_untaxed_amount);
@@ -45,6 +52,7 @@ odoo.define('telenoc_pos_ext.OrderCartWidget', function(require) {
                 this.state.c_tax_amount = this.env.pos.format_currency(c_tax_amount);
                 this.state.uni_discount = this.env.pos.format_currency(uni_discount);
                 this.state.uni_discount_am = this.env.pos.format_currency(uni_discount_am);
+
 //                this.showPopup('ErrorPopup', {
 //                                    title: this.env._t('Customer Error'),
 //                                    body: this.env._t(

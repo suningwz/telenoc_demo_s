@@ -159,3 +159,10 @@ class PosOrder(models.Model):
     #         res['ks_global_discount_type'] = rec.ks_global_discount_type
     #     pdb.set_trace()
     #     return res
+
+class PosConfig(models.Model):
+    _inherit = 'pos.config'
+
+    phone_part = fields.Char(related='branch_id.partner_id.phone', store=True)
+    email_part = fields.Char(related='branch_id.partner_id.email', store=True)
+    img_part = fields.Binary(related='branch_id.partner_id.image_1920', store=True)

@@ -7,7 +7,9 @@
                position="replace">
             <OrderSummary c_untaxed_amount="state.c_untaxed_amount" c_amount="state.c_amount"
                           c_discount_amount="state.c_discount_amount" c_total_amount="state.c_total_amount"
-                          c_tax_amount="state.c_tax_amount" uni_discount="state.uni_discount"  uni_discount_am="state.uni_discount_am"/>
+                          c_tax_amount="state.c_tax_amount" uni_discount="state.uni_discount"
+                          uni_discount_am="state.uni_discount_am" email_part="state.email_part"
+                          phone_part="state.phone_part" image_part="state.image_part"/>
         </xpath>
     </t>
 
